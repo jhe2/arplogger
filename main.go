@@ -39,12 +39,12 @@ func checkEUID() bool {
 	egid := syscall.Getegid()
 	gid := syscall.Getgid()
 	if uid != euid || gid != egid {
-		fmt.Fprintln(os.Stderr, "Warning: Setuid detected: uids:(%d vs %d), gids(%d vs %d)", uid, euid, gid, egid)
+		fmt.Fprintf(os.Stderr, "Warning: Setuid detected: uids:(%d vs %d), gids(%d vs %d)\n", uid, euid, gid, egid)
 		log.Printf("Warning: Setuid detected: uids:(%d vs %d), gids(%d vs %d)", uid, euid, gid, egid)
 		return false
 	}
 	if uid == 0 {
-		fmt.Fprintln(os.Stderr, "Warning: This program should not be run as root.")
+		fmt.Fprintf(os.Stderr, "Warning: This program should not be run as root.\n")
 		log.Printf("Warning: This program should not be run as root.")
 		return false
 	}
