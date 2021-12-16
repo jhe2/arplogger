@@ -152,7 +152,10 @@ func main() {
 
 	checkEUID()
 
-	db.Init(*databaseFlag)
+	err := db.Init(*databaseFlag)
+	if err != nil {
+		log.Fatal("Error: Problem with database: ", err)
+	}
 
 	// Open socket(s)
 	socks, err := listen(*ifacesFlag)

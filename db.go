@@ -20,9 +20,14 @@ type DB struct {
 }
 
 func (db *DB) Init(dbPath string) error {
+	db.mu.Lock()
+	defer db.mu.Unlock()
 	db.databasePath = dbPath
-	// TODO: Create db file if it does not exist
-	return nil
+	f, err := os.OpenFile(db.databasePath, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
+	if err == nil {
+		f.Close()
+	}
+	return err
 }
 
 // CheckMAC checks if the supplied MAC address is found in the database
