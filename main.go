@@ -2,7 +2,7 @@
 // the specified interface(s) to discover new hosts appearing on the
 // local IPv4 network.
 //
-// Copyright (c) 2021 Johannes Heimansberg
+// Copyright (c) 2021-2022 Johannes Heimansberg
 // License: MIT
 //
 // To avoid running as root, it needs raw socket capabilities:
@@ -27,8 +27,8 @@ import (
 
 var (
 	ifacesFlag   = flag.String("i", "eth0", "(comma-separated list of) network interface(s) to use for ARP request")
-	logfileFlag  = flag.String("l", "/var/log/arplogger.log", "logfile path")
-	databaseFlag = flag.String("d", "/var/cache/arplogger.db", "database path")
+	logfileFlag  = flag.String("l", "/var/log/arplogger/arplogger.log", "logfile path")
+	databaseFlag = flag.String("d", "/var/cache/arplogger/arplogger.db", "database path")
 )
 
 // checkEUID checks if the program is running with setuid or as root and
