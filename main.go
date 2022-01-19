@@ -111,7 +111,7 @@ func listen(interfaces string) ([]*arp.Client, error) {
 }
 
 // Go routine for reading ARP packets from a socket
-func readSocket(c arp.Client, ifname string, lc chan string, db DB) {
+func readSocket(c arp.Client, ifname string, lc chan string, db *DB) {
 	for {
 		arp, _, err := c.Read()
 		if err != nil {
@@ -177,7 +177,7 @@ func main() {
 	for i, s := range socks {
 		defer s.Close()
 		log.Printf("Starting reader thread for %s...\n", ifaces[i])
-		go readSocket(*s, ifaces[i], logChan, db)
+		go readSocket(*s, ifaces[i], logChan, &db)
 	}
 
 	for {
