@@ -33,22 +33,18 @@ var (
 
 // checkEUID checks if the program is running with setuid or as root and
 // warns about it
-func checkEUID() bool {
+func checkEUID() error {
 	euid := syscall.Geteuid()
 	uid := syscall.Getuid()
 	egid := syscall.Getegid()
 	gid := syscall.Getgid()
 	if uid != euid || gid != egid {
-		fmt.Fprintf(os.Stderr, "Warning: Setuid detected: uids:(%d vs %d), gids(%d vs %d)\n", uid, euid, gid, egid)
-		log.Printf("Warning: Setuid detected: uids:(%d vs %d), gids(%d vs %d)", uid, euid, gid, egid)
-		return false
+		return fmt.Errorf("Warning: Setuid detected: uids(%d vs %d), gids(%d vs %d)", uid, euid, gid, egid)
 	}
 	if uid == 0 {
-		fmt.Fprintf(os.Stderr, "Warning: This program should not be run as root.\n")
-		log.Printf("Warning: This program should not be run as root.")
-		return false
+		return fmt.Errorf("Warning: This program should not be run as root.")
 	}
-	return true
+	return nil
 }
 
 // listen tries to open a raw socket on each of the supplied interfaces
@@ -150,9 +146,13 @@ func main() {
 		log.SetOutput(f)
 	}
 
-	checkEUID()
+	err := checkEUID()
+	if err != nil {
+		fmt.Println(err.Error())
+		log.Println(err.Error())
+	}
 
-	err := db.Init(*databaseFlag)
+	err = db.Init(*databaseFlag)
 	if err != nil {
 		log.Fatal("Error: Problem with database: ", err)
 	}
