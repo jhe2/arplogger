@@ -26,7 +26,7 @@ import (
 )
 
 var (
-	ifacesFlag   = flag.String("i", "eth0", "(comma-separated list of) network interface(s) to use for ARP request")
+	ifacesFlag   = flag.String("i", "eth0", "(comma-separated list of) network interface(s) to listen for ARP packets")
 	logfileFlag  = flag.String("l", "/var/log/arplogger/arplogger.log", "logfile path")
 	databaseFlag = flag.String("d", "/var/cache/arplogger/arplogger.db", "database path")
 )
