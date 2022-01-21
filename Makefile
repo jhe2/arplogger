@@ -1,3 +1,6 @@
+# arplogger Makefile
+# Copyright (c) 2021-2022 Johannes Heimansberg
+# SPDX-License-Identifier: MIT
 PREFIX?=/usr/local
 DESTDIR?=
 # A typical install would install the binary owned by root with group

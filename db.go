@@ -3,7 +3,7 @@
 // local IPv4 network.
 //
 // Copyright (c) 2021-2022 Johannes Heimansberg
-// License: MIT
+// SPDX-License-Identifier: MIT
 package main
 
 import (

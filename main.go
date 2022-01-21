@@ -3,7 +3,7 @@
 // local IPv4 network.
 //
 // Copyright (c) 2021-2022 Johannes Heimansberg
-// License: MIT
+// SPDX-License-Identifier: MIT
 //
 // To avoid running as root, it needs raw socket capabilities:
 // chown root:arplogger ./arplogger
