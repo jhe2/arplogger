@@ -39,3 +39,11 @@ uninstall:
 	rmdir "$(LOGDIR)"
 	-rm -f "$(DATADIR)/arplogger.db"
 	rmdir "$(DATADIR)"
+
+dist:
+	-rm -rf "arplogger-$(VERSION)"
+	mkdir "arplogger-$(VERSION)"
+	echo "$(VERSION)" > "arplogger-$(VERSION)/VERSION"
+	cp *.go go.mod go.sum Makefile README.md LICENSE "arplogger-$(VERSION)"
+	tar cvzf "arplogger-$(VERSION).tar.gz" "arplogger-$(VERSION)"
+	-rm -rf "arplogger-$(VERSION)"
