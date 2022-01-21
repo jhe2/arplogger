@@ -1,0 +1,8 @@
+---
+pipeline:
+  go:
+    image: golang
+    commands:
+      - go get
+      - go vet
+      - go test
