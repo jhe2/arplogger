@@ -29,6 +29,8 @@ var (
 	ifacesFlag   = flag.String("i", "eth0", "(comma-separated list of) network interface(s) to listen for ARP packets")
 	logfileFlag  = flag.String("l", "/var/log/arplogger/arplogger.log", "logfile path")
 	databaseFlag = flag.String("d", "/var/cache/arplogger/arplogger.db", "database path")
+	versionFlag  = flag.Bool("v", false, "version information")
+	version      = "undefined"
 )
 
 // checkEUID checks if the program is running with setuid or as root and
@@ -135,6 +137,13 @@ func writeLog(lc chan string) {
 func main() {
 	var db DB
 	flag.Parse()
+
+	if *versionFlag {
+		fmt.Printf("arplogger version: %v\n", version)
+		fmt.Printf("Copyright (c) 2021-2022 Johannes Heimansberg\n")
+		fmt.Printf("License: MIT\n")
+		os.Exit(0)
+	}
 
 	// Prepare logfile, unless "-" was specified, which will be treated as stderr
 	if *logfileFlag != "-" {
