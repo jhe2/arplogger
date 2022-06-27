@@ -13,7 +13,7 @@ DATADIR?=/var/cache/arplogger
 VERSION=`git describe --always --long --dirty --tags||cat VERSION||echo "unknown"`
 
 arplogger: main.go db.go
-	CGO_ENABLED=0 go build -trimpath -ldflags "-s -w -X main.version=$(VERSION)"
+	CGO_ENABLED=0 go build -buildmode=pie -trimpath -ldflags "-s -w -X main.version=$(VERSION)"
 
 clean:
 	-rm arplogger
