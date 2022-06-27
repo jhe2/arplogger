@@ -10,7 +10,7 @@ INSTUSER?=arplogger
 INSTGROUP?=arplogger
 LOGDIR?=/var/log/arplogger
 DATADIR?=/var/cache/arplogger
-VERSION=`git describe --always --long --dirty --tags||cat VERSION||echo "unknown"`
+VERSION=`git describe --always --long --dirty --tags 2>/dev/null||cat VERSION 2>/dev/null||basename $(PWD) 2>/dev/null|cut -d- -f2- 2>/dev/null||echo "unknown"`
 
 arplogger: main.go db.go
 	CGO_ENABLED=0 go build -buildmode=pie -trimpath -ldflags "-s -w -X main.version=$(VERSION)"
